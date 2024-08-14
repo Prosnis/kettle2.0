@@ -1,0 +1,145 @@
+body {
+  height: 100vh;
+  margin: 0;
+  font-family: "Oswald", sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: 800px;
+  height: 90vh;
+  margin-left: auto;
+  margin-right: auto;
+  flex-wrap: wrap;
+  background-color: #20a1d8;
+  border-radius: 0.5rem;
+  padding: 50px;
+}
+
+#containerSet {
+
+  border: 1px solid black;
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+  height: 400px;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  border: none;
+
+}
+
+#container {
+  border: 1px solid black;
+  padding: 20px;
+  width: 300px;
+  height: 400px;
+  text-align: center;
+  border-radius: 30px;
+  background-color: #20a1d8;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  border: none;
+  display: flex;
+  flex-direction: column;
+
+}
+
+
+
+#containerStatus {
+  border: 1px solid black;
+  padding: 20px;
+  text-align: center;
+  width: 650px;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  border: none;
+}
+
+
+.statusBar {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  grid-area: set;
+  padding: 0;
+}
+
+input,
+button {
+  margin: 5px 0;
+  padding: 10px;
+  width: 100%;
+  font-size: 15px;
+  background-color: white;
+  border: 1px solid #696969;
+  border-radius: 0.25rem;
+  text-transform: lowercase;
+}
+
+button {
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  padding: 0.8em 1em calc(0.8em + 3px);
+  border-radius: 3px;
+  background: #08a7e6;
+  transition: 0.2s;
+}
+button:hover {
+  background: #1e92c4;
+}
+button:active {
+  background: #20a1d8;
+}
+
+progress {
+  font-size: 30px;
+}
+
+ .disabled {
+  pointer-events: none;
+  opacity: 0.4;
+  user-select: none;
+} 
+
+.wrong {
+  border: 1px solid red;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+
+.hide {
+  display: none;
+}
+
+.burn {
+  background-image: url("../img/burn.webp");
+  background-size: 100% 100%;
+}
+
+.link {
+  flex-basis: 100%;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+}

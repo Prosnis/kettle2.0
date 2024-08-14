@@ -1,0 +1,67 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Electric Kettle</title>
+  </head>
+  <body id="body">
+    <div class="flex">
+      <form id="containerSet">
+        <h2>Settings</h2>
+        <label for="name">Name:</label>
+        <input type="text" id="setName" required />
+        <label for="setPower" id="labelPower">Power:</label>
+        <input type="range" id="setPower" min="300" max="1200" step="100" />
+        <label for="setCapacity" id="labelCapacity">Capacity:</label>
+        <input type="range" id="setCapacity" min="300" max="2300" step="100" />
+        <button id="btnSet">set</button>
+      </form>
+
+      <form id="container" class="disabled">
+        <h2 id="userNameKettle">Electric Kettle</h2>
+        <label for="volume">Volume (ml):
+          <input type="number" id="inputVolume" min="0" required />
+          <span class="hide error" id="errorWater">water limit exceeded</span>
+        </label>
+        <label for="temperature">Temperature (°C):</label>
+        <input type="number" id="temperature" min="0" max="100" required />
+        <span class="hide error" id="errorTemp">temperature limit exceeded</span>
+        <button id="btnFill">Fill</button>
+        <button id="btnStart">Start</button>
+        <button id="btnStop">Stop</button>
+      </form>
+
+      <div id="containerStatus">
+        <h2>Status</h2>
+        <div id="toHide">
+          <ul class="statusBar">
+            <li>
+              <span for="temperatureStatus" id="temperatureStatusLabel">temperature: 00.00°c</span>
+            </li>
+            <li>
+              <label for="volumeStatus" id="volumeStatusLabel">volume: current/max ml</label>
+              <progress id="volumeStatus" max="100" value="0"></progress>
+            </li>
+            <li>
+              <span for="boiledStatus" id="boiledStatusLabel">time to ready: 000 s</span>
+            </li>
+          </ul>
+        </div>
+        <span><h2 id="statusInfo">waiting...</h2></span>
+      </div>
+      <a class="link" href="https://github.com/Prosnis/kettle2.0/tree/main/script">code</a>
+    </div>
+    
+
+    <script type="module" src="./script/model.mjs"></script>
+    <script type="module" src="./script/controlForm/controlForm.controller.js"
+    ></script>
+    <script type="module" src="./script/controlForm/controlForm.view.js"
+    ></script>
+    <script type="module" src="./script/setForm/setForm.controller.js"></script>
+    <script type="module" src="./script/setForm/setForm.view.js"></script>
+    <script type="module"src="./script/controlForm/statusForm.view.js"
+    ></script>
+  </body>
+</html>
