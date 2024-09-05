@@ -8,6 +8,7 @@ view.elements.setForm.addEventListener("submit", (e) => {
   model.disabled(view.elements.setForm)
   model.disabled(view.elements.controlForm)
   view.displayName(setInfo)
+  view.elements.inputVolume.focus()
 });
 
 view.elements.setForm.addEventListener("input", (e) => {

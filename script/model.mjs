@@ -31,7 +31,11 @@ class ElectricKettle {
   }
 
   #checkTemp(finalTemperature) {
-    return finalTemperature > 100 ? false : true;
+    if(finalTemperature >= 100 || finalTemperature < 0) {
+      return false
+    } else {
+      return true
+    }
   }
 
   fill(volume, temp) {
@@ -50,40 +54,49 @@ class ElectricKettle {
       );
       this.waterVolume += volume;
     }
-    /////////
 
     this.doneTime = Math.round(
       [this.waterVolume * 4.18 * [100 - this.finalTemperature]] / this.#power
     );
   }
 
-  start(onUpdate, onStop, onDone, onBurn) {
-    if (this.waterVolume < 100) {
-      if (typeof onUpdate === "function") {
-        onBurn();
-      }
-      return
-    } 
-    this.startTime = Date.now();
 
-    this.intervalTimer = setInterval(() => {
-      this.elapsedTime = Math.floor((Date.now() - this.startTime) / 1000);
-      this.remainingTime = Math.floor(this.doneTime - this.elapsedTime);
 
-      if (typeof onUpdate === "function") {
-        onUpdate(this.remainingTime);
+
+  
+
+  start(onUpdate) {
+    return new Promise((resolve, reject) => {
+      if (this.waterVolume < 100) {
+        reject('burn');  
+        return;
       }
-      if (this.remainingTime <= 0) {
-        this.stop(onStop); 
-        if (typeof onDone === "function") {
-          onDone(); 
+  
+      this.startTime = Date.now();
+  
+      this.intervalTimer = setInterval(() => {
+        this.elapsedTime = Math.floor((Date.now() - this.startTime) / 1000);
+        this.remainingTime = Math.floor(this.doneTime - this.elapsedTime);
+        
+  
+
+        if (typeof onUpdate === "function") { 
+          onUpdate(this.remainingTime);
         }
-      }
-    }, 1000);
-    this.working = true;
+  
+        if (this.remainingTime <= 0) {
+          this.stop();  
+          resolve(this.finalTemperature); 
+        }
+  
+      }, 1000);
+  
+      this.working = true; 
+    });
   }
 
-  stop(onStop) {
+
+  stop() {
     clearInterval(this.intervalTimer);
     if (this.working) {
       this.working = false;
@@ -93,11 +106,6 @@ class ElectricKettle {
       this.doneTime = Math.round(
         [this.waterVolume * 4.18 * [100 - this.finalTemperature]] / this.#power
       );
-      ////
-      if (typeof onStop === "function") {
-        onStop(this.finalTemperature);
-      }
-      ////
     }
   }
 }
@@ -129,7 +137,11 @@ function errorVolume(volume, displayError, removeError) {
 }
 
 function errorTemp(temp, displayError, removeError) {
-  temp >= 100 ? displayError() : removeError();
+  if (temp >=100 || temp < 0) {
+    displayError()
+  } else {
+    removeError()
+  }
 }
 
 export { createNewKettle, userKettle, disabled, errorVolume, errorTemp };

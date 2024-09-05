@@ -6,6 +6,11 @@ import * as data from "../data/data.js";
 const { boiling, waiting, done, burn } = data.statuses;
 const { inputVolume, errorWater, errorTemp, inputTemp } = viewControl.elements;
 
+
+
+
+
+
 function fill() {
   if (model.userKettle.working) return;
   viewStatus.updateStatus(waiting);
@@ -31,6 +36,12 @@ function fill() {
   console.log(model.userKettle);
 }
 
+
+
+
+
+
+
 function stop() {
   if (!model.userKettle.working) return;
   viewStatus.updateStatus(waiting);
@@ -38,26 +49,34 @@ function stop() {
   viewStatus.updateTemp(model.userKettle.finalTemperature);
 }
 
-function start() {
+
+
+
+async function start() {
   if (model.userKettle.working) return;
-  viewStatus.updateStatus(boiling);
-  model.userKettle.start(
-    (remainingTime) => {
-      viewStatus.updateTimer(remainingTime);
-    },
-    (finalTemp) => {
-      viewStatus.updateTemp(finalTemp);
-    },
-    () => {
-      viewStatus.updateStatus(done);
-    },
-    () => {
-      viewStatus.burned()
-      viewStatus.updateStatus(burn)
-      viewStatus.newOne()
+
+  viewStatus.updateStatus(boiling); 
+
+  try {
+      const result = await model.userKettle.start((remainingTime) => {
+      viewStatus.updateTimer(remainingTime); 
+    });
+
+
+    viewStatus.updateTemp(result) 
+    viewStatus.updateStatus(done); 
+  } catch (error) { 
+    if (error === 'burn') {
+      viewStatus.burned();
+      viewStatus.updateStatus(burn);
+      viewStatus.newOne();
+    } else {
+      console.error('unexpected error:', error); 
     }
-  );
+  }
 }
+
+
 
 function setupEventListeners() {
   Object.entries(data.events).forEach(([key, value]) => {

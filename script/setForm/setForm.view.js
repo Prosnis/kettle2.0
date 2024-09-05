@@ -5,6 +5,7 @@ const elements = {
     setCapacity : document.getElementById("setCapacity"),
     userNameKettle : document.getElementById("userNameKettle"),
     controlForm : document.getElementById("container"),
+    inputVolume: document.getElementById("inputVolume"),
 }
 
 function getSetData() {
